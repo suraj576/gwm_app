@@ -1,0 +1,53 @@
+name: groundwater_management
+description: A new Flutter project.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.1.0
+  intl: ^0.18.0 
+
+  flutter_bluetooth_serial: ^0.4.0
+  permission_handler: ^11.0.1
+
+  # Firebase packages
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.15.3
+  cloud_firestore: ^4.13.6
+
+  # UI packages
+  pinput: ^3.0.1
+  fluttertoast: ^8.2.4
+  cupertino_icons: ^1.0.6
+  provider: ^6.1.1
+
+  # Charts and other packages
+  syncfusion_flutter_charts: ^24.2.9
+  google_fonts: ^6.1.0
+  select_form_field: ^2.2.0
+  geolocator: ^10.1.0
+  dio: ^5.3.3
+  animated_text_kit: ^4.2.2
+  infinite_scroll_pagination: ^4.0.0
+  reorderables: ^0.6.0
+
+  # Localization - Let flutter_localizations handle intl version
+  flutter_localizations:
+    sdk: flutter
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  generate: true  
+  assets:
+    - assets/

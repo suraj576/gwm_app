@@ -1,0 +1,174 @@
+/*
+ * GWM App Arduino Code
+ * For HC-05 Bluetooth communication with GWM Flutter app
+ * Rotary encoder position tracking with LCD display
+ */
+
+#include <LiquidCrystal.h>
+
+// Pin definitions for hardware connections
+const int clkPin = 2;        // Encoder clock pin
+const int dtPin = 3;         // Encoder data pin
+const int swPin = 4;         // Encoder switch pin
+const int buzzerPin = 12;    // Buzzer control pin
+
+// LCD pin connections (RS, EN, D4, D5, D6, D7)
+LiquidCrystal lcd(7, 6, 8, 9, 10, 11);
+
+// Global variables for encoder and system state
+int encoderPos = 0;          // Current encoder position
+int lastClkState;            // Previous encoder state for change detection
+bool buzzerOn = false;       // Current buzzer status
+bool lastButtonState = HIGH; // Previous button state
+unsigned long lastDebounceTime = 0; // For button debouncing
+const unsigned long debounceDelay = 50; // 50ms debounce period
+
+void setup() {
+  // Configure input/output pins
+  pinMode(clkPin, INPUT);
+  pinMode(dtPin, INPUT);
+  pinMode(swPin, INPUT_PULLUP);    // Enable internal pullup resistor
+  pinMode(buzzerPin, OUTPUT);
+  digitalWrite(buzzerPin, HIGH);    // Initialize buzzer OFF (HIGH = OFF)
+
+  // Initialize LCD display
+  lcd.begin(16, 2);
+  lcd.print("System Starting");
+
+  // Initialize serial communication
+  Serial.begin(9600);      // USB serial for debugging
+  Serial1.begin(9600);     // Hardware serial for HC-05 bluetooth
+
+  // Store initial encoder state
+  lastClkState = digitalRead(clkPin);
+
+  // Startup sequence
+  delay(1000);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Ready!");
+  
+  // Send initialization messages
+  Serial.println("System started");
+  Serial1.println("System started via Bluetooth");
+  Serial.println("Waiting for encoder action...");
+  Serial.println("------------------------------");
+}
+
+void loop() {
+  
+  readEncoder();
+  readButton();
+}
+
+/*
+ * Handle rotary encoder rotation
+ * Detects clockwise/counter clockwise movement
+ */
+void readEncoder() {
+  int currentClkState = digitalRead(clkPin);
+  
+  if (currentClkState != lastClkState) {
+    // Determine rotation direction by comparing CLK and DT pins
+    if (digitalRead(dtPin) != currentClkState) {
+      encoderPos++;    // Clockwise rotation
+    } else {
+      encoderPos--;    // Counter clockwise rotation
+    }
+
+    // Update display and log the change
+    updatePositionDisplay();
+    logEncoderChange();
+  }
+  lastClkState = currentClkState;
+}
+
+/*
+ * Handle encoder button press with debouncing
+ * Toggles buzzer and sends data to GWM app
+ */
+void readButton() {
+  bool currentButtonState = digitalRead(swPin);
+  
+  // Reset debounce timer on state change
+  if (currentButtonState != lastButtonState) {
+    lastDebounceTime = millis();
+  }
+  
+  // Check if debounce period has elapsed
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    // Detect button press (HIGH to LOW transition)
+    if (currentButtonState == LOW && lastButtonState == HIGH) {
+      toggleBuzzer();
+      updateBuzzerDisplay();
+      logButtonPress();
+      sendGWMData();    // Send data to GWM app
+    }
+  }
+  
+  lastButtonState = currentButtonState;
+}
+
+/*
+ * Update LCD display with current encoder position
+ * Only updates the position line to minimize flicker
+ */
+void updatePositionDisplay() {
+  lcd.setCursor(0, 0);
+  lcd.print("Pos: ");
+  lcd.print(encoderPos);
+  lcd.print("     ");    // Clear any remaining characters
+}
+
+/*
+ * Update LCD display with buzzer status
+ * Clears and rewrites the status line
+ */
+void updateBuzzerDisplay() {
+  lcd.setCursor(0, 1);
+  lcd.print("                ");    // Clear entire line
+  lcd.setCursor(0, 1);
+  lcd.print("Buzzer is ");
+  lcd.print(buzzerOn ? "ON " : "OFF");
+}
+
+/*
+ * Toggle buzzer state and control hardware pin
+ * Uses LOW to turn buzzer ON (active low)
+ */
+void toggleBuzzer() {
+  buzzerOn = !buzzerOn;
+  digitalWrite(buzzerPin, buzzerOn ? LOW : HIGH);
+}
+
+/*
+ * Log encoder rotation to USB serial for debugging
+ */
+void logEncoderChange() {
+  Serial.print("Encoder rotated | New Pos: ");
+  Serial.println(encoderPos);
+}
+
+/*
+ * Log button press event to USB serial
+ * Includes buzzer state and current position
+ */
+void logButtonPress() {
+  Serial.println("Button Pressed!");
+  Serial.print(" Buzzer is now: ");
+  Serial.println(buzzerOn ? "ON" : "OFF");
+  Serial.print("Value Sent: ");
+  Serial.println(encoderPos);
+}
+
+/*
+ * Send data to GWM app via bluetooth
+ * Transmits button press event and current measurements
+ */
+void sendGWMData() {
+  Serial1.println("Button Pressed!");
+  Serial1.print("Buzzer is now: ");
+  Serial1.println(buzzerOn ? "ON" : "OFF");
+  Serial1.print("Value Sent: ");
+  Serial1.println(encoderPos);
+}
