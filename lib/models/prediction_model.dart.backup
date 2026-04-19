@@ -1,0 +1,96 @@
+import 'package:flutter/material.dart';
+
+class PredictionModel {
+  final int month;
+  final String date;
+  final double predictedDepth;
+  final double confidenceLower;
+  final double confidenceUpper;
+  final String riskLevel;
+
+  PredictionModel({
+    required this.month,
+    required this.date,
+    required this.predictedDepth,
+    required this.confidenceLower,
+    required this.confidenceUpper,
+    required this.riskLevel,
+  });
+
+  factory PredictionModel.fromJson(Map<String, dynamic> json) {
+    return PredictionModel(
+      month: json['month'],
+      date: json['date'],
+      predictedDepth: json['predicted_depth'].toDouble(),
+      confidenceLower: json['confidence_interval']['lower'].toDouble(),
+      confidenceUpper: json['confidence_interval']['upper'].toDouble(),
+      riskLevel: json['risk_level'],
+    );
+  }
+
+  Color get riskColor {
+    switch (riskLevel) {
+      case 'safe':
+        return Colors.green;
+      case 'warning':
+        return Colors.orange;
+      case 'critical':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  String get riskDescription {
+    switch (riskLevel) {
+      case 'safe':
+        return 'Water level stable';
+      case 'warning':
+        return 'Moderate depletion expected';
+      case 'critical':
+        return 'Severe depletion risk';
+      default:
+        return 'Unknown';
+    }
+  }
+}
+
+class PredictionResponse {
+  final bool success;
+  final String? wellId;
+  final List<PredictionModel>? predictions;
+  final String? modelVersion;
+  final String? generatedAt;
+  final double? currentDepth;
+  final String? error;
+
+  PredictionResponse({
+    required this.success,
+    this.wellId,
+    this.predictions,
+    this.modelVersion,
+    this.generatedAt,
+    this.currentDepth,
+    this.error,
+  });
+
+  factory PredictionResponse.fromJson(Map<String, dynamic> json) {
+    if (json['success'] == false) {
+      return PredictionResponse(
+        success: false,
+        error: json['error'] ?? 'Unknown error',
+      );
+    }
+
+    return PredictionResponse(
+      success: true,
+      wellId: json['well_id'],
+      predictions: (json['predictions'] as List)
+          .map((p) => PredictionModel.fromJson(p))
+          .toList(),
+      modelVersion: json['model_version'],
+      generatedAt: json['generated_at'],
+      currentDepth: json['current_depth']?.toDouble(),
+    );
+  }
+}

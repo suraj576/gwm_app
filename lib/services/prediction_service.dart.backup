@@ -1,0 +1,65 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import '../models/prediction_model.dart';
+
+class PredictionService {
+  static const String BASE_URL = '192.168.23.234:5000';  // UPDATE THIS!
+
+  Future<PredictionResponse> getPredictions({
+    required String wellId,
+    required double latitude,
+    required double longitude,
+    required double currentDepth,
+  }) async {
+    try {
+      print('Requesting predictions from $BASE_URL/predict');
+      
+      final response = await http.post(
+        Uri.parse('$BASE_URL/predict'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'well_id': wellId,
+          'latitude': latitude,
+          'longitude': longitude,
+          'current_depth': currentDepth,
+          'prediction_months': [1, 3, 6],
+        }),
+      ).timeout(const Duration(seconds: 30));
+
+      print('Response status: ${response.statusCode}');
+      
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return PredictionResponse.fromJson(data);
+      } else {
+        return PredictionResponse(
+          success: false,
+          error: 'Server error: ${response.statusCode}',
+        );
+      }
+    } catch (e) {
+      print('Error: $e');
+      return PredictionResponse(
+        success: false,
+        error: 'Network error: ${e.toString()}',
+      );
+    }
+  }
+
+  Future<Map<String, dynamic>?> getModelInfo() async {
+    try {
+      final response = await http.get(
+        Uri.parse('$BASE_URL/model/info'),
+      ).timeout(const Duration(seconds: 10));
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data['model'];
+      }
+      return null;
+    } catch (e) {
+      print('Error fetching model info: $e');
+      return null;
+    }
+  }
+}

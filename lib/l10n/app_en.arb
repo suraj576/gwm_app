@@ -1,0 +1,432 @@
+{
+    "signin": "Login",
+    "@signin": {
+      "description": "Login into system"
+    },
+
+    "mobile": "Mobile number",
+    "@mobile": {
+      "description": "Type mobile number"
+    },
+    
+    "cont": "Continue",
+    "@cont": {
+      "description": "Continue the process ahead"
+    },
+    
+    "noacc": "No Account ?",
+    "@noacc": {
+      "description": "Is user registered?"
+    },
+
+    "wait": "Please wait...",
+    "@wait": {
+      "description": "Wait till process ends"
+    },
+
+    "firstsignup": "Mobile number not registered",
+    "@firstsignup": {
+      "description": "First need to register"
+    },
+
+    "signup": "Register",
+    "@signup": {
+      "description": "Register into system"
+    },   
+
+    "name": "Name",
+    "@name": {
+      "description": "Enter name"
+    },   
+
+    "ids": "Comma(,) seperated Well Id",
+    "@ids": {
+      "description": "Enter Comma(,) seperated Well Id"
+    }, 
+    
+    "address": "Address",
+    "@address": {
+      "description": "Enter address"
+    }, 
+
+    "city": "City",
+    "@city": {
+      "description": "Enter city"
+    },
+
+    "state": "State",
+    "@state": {
+      "description": "Enter state"
+    },
+
+    "state1": "State 1",
+        "@state1": {
+          "description": "Enter state"
+        },
+
+    "state2": "State 2",
+        "@state2": {
+          "description": "Enter state"
+        },
+
+    "pincode": "Pincode",
+    "@pincode": {
+      "description": "Enter Pincode"
+    },   
+
+    "ver": "OTP Verification",
+    "@ver": {
+      "description": "Verification of otp"
+    },
+
+    "msg1": "A OTP has been sent to the mobile number {phone}.This OTP will be valid only for 2 minutes.",
+    "@msg1": {
+      "description": "msg",
+      "placeholders": {
+         "phone": {
+           "type": "String"
+         }
+      }
+    },
+
+    "invalid": "Invalid OTP",
+    "@invalid": {
+      "description": "Invalid otp msg"
+    },        
+
+    "fail": "Verification failed, try again!",
+    "@fail": {
+      "description": "failure msg"
+    },    
+
+    "home": "Home Page",
+    "@home": {
+      "description": "Title of home page"
+    },
+    
+    "search": "Search Data",
+    "@search": {
+      "description": "Searching data"
+    },
+
+    "search2": "Search",
+    "@search2": {
+      "description": "Search graph data"
+    },
+
+    "visualizedata": "Visualize Data",
+    "@visualizedata": {
+      "description": "Visualize data"
+    },
+
+     "comparegraph": "Compare Graph",
+             "@comparegraph": {
+               "description": "Compare Graph"
+         },
+
+         "compare_graph": "Compare Graph",
+                 "@compare_graph": {
+                   "description": "Compare Graph"
+         },
+
+    "update": "Edit/Delete data",
+    "@update": {
+      "description": "Title of edit page"
+    },
+
+    "view": "View Your Added Data",
+    "@view": {
+       "description": "View data page"
+    },  
+
+    "latitude": "Latitude",
+    "@latitude": {
+       "description": "Latitude"
+    },
+
+    "longitude": "Longitude",
+    "@longitude": {
+       "description": "Longitude"
+    },
+
+    "year": "Year",
+    "@year": {
+       "description": "Year"
+    },
+
+    "month": "Month",
+    "@month": {
+       "description": "Month"
+    },
+
+    "waterlevel": "Waterlevel",
+    "@waterlevel": {
+       "description": "Waterlevel"
+    },
+
+    "wellid":  "Well Id",
+    "@wellid": {
+       "description": "Well Id's"
+    },
+
+    "wellid1":  "Well Id 1",
+        "@wellid1": {
+           "description": "Well Id's"
+        },
+
+    "wellid2":  "Well Id 2",
+        "@wellid2": {
+           "description": "Well Id's"
+        },
+
+    "edit": "Edit",
+    "@edit": {
+       "description": "Edit data"
+    }, 
+    
+    "delete": "Delete",
+    "@delete": {
+       "description": "Delete data"
+    },
+
+    "add": "Add Data",
+    "@add": {
+      "description": "Adding data"
+    },  
+
+    "newadd": "New Data",
+    "@newadd": {
+      "description": "Adding new data"
+    },
+    
+    "graph": "Graph",
+    "@graph": {
+      "description": "Graphs"
+    },
+    
+    "select": "Date Range",
+    "@select": {
+      "description": "Select Date range"
+    },
+
+    "selectview": "Select View",
+    "@selectview": {
+      "description": "Select View type"
+    },
+    
+    "monthview": "Monthwise View",
+    "@monthview": {
+      "description": "Monthwise view"
+    },
+    
+    "monthvslevel": "Month vs Waterlevel",
+    "@monthvslevel": {
+      "description": "Month vs Waterlevel graph"
+    },
+    
+    "yearview": "Yearwise View",
+    "@yearview": {
+      "description": "Yearwise view"
+    },
+    
+    "yearvslevel": "Year vs Waterlevel",
+    "@yearvslevel": {
+      "description": "Year vs Waterlevel graph"
+    },
+
+    "m1": "January",
+    "@m1": {
+      "description": "January"
+    },
+
+    "m2": "February",
+    "@m2": {
+      "description": "February"
+    },
+
+    "m3": "March",
+    "@m3": {
+      "description": "March"
+    },
+    
+    "m4": "April",
+    "@m4": {
+      "description": "April"
+    },
+    
+    "m5": "May",
+    "@m5": {
+      "description": "May"
+    },
+    
+    "m6": "June",
+    "@m6": {
+      "description": "June"
+    },
+    
+    "m7": "July",
+    "@m7": {
+      "description": "July"
+    },
+    
+    "m8": "August",
+    "@m8": {
+      "description": "August"
+    },
+    
+    "m9": "September",
+    "@m9": {
+      "description": "September"
+    },
+    
+    "m10": "October",
+    "@m10": {
+      "description": "October"
+    },
+    
+    "m11": "November",
+    "@m11": {
+      "description": "November"
+    },
+    
+    "m12": "December",
+    "@m12": {
+      "description": "December"
+    },
+    
+    "norecord": "No Records Found!",
+    "@norecord": {
+      "description": "No Records Found!"
+    },
+
+    "norecord1": "Cannot Compare Graphs!",
+        "@norecord1": {
+          "description": "Cannot Compare Graphs!"
+        },
+
+    "editdata": "Edit Data",
+    "@editdata": {
+      "description": "Edit Data"
+    },
+
+    "required": "Required",
+    "@required": {
+      "description": "Required"
+    },
+
+    "digitsinmob": "Mobile number must be of 10 digits!",
+    "@digitsinmob": {
+      "description": "Message for mobile number constraints"
+    },
+    
+    "digitsinpin": "Pincode must be of 6 digits!",
+    "@digitsinpin": {
+      "description": "Message for pincode constraints"
+    },
+
+    "regsuccessful": "Registration Successful!",
+    "@regsuccessful": {
+      "description": "Registration Successful!"
+    },
+
+    "alreadyreg": "User already registered!",
+    "@alreadyreg": {
+      "description": "User already registered!"
+    },
+
+    "mobregistered": "User with this mobile number is already registered!",
+    "@mobregistered": {
+      "description": "User with this mobile number is already registered!"
+    },
+
+    "dataexist": "Data Already exists",
+    "@dataexist": {
+      "description": "Data Already exists"
+    },
+
+    "dataadded": "Data Added Successfully",
+    "@dataadded": {
+      "description": "Data Added Successfully"
+    },
+
+    "incorrect": "Incorrect",
+    "@incorrect": {
+      "description": "Incorrect entry"
+    },
+
+    "dataupdated": "Data updated successfully",
+    "@dataupdated": {
+      "description": "Data updated"
+    },
+
+    "datadeleted": "Data deleted successfully",
+    "@datadeleted": {
+      "description": "Data deleted"
+    },
+
+    "nodataadded": "You have not entered any data!",
+    "@nodataadded":{
+      "description": "You have not entered any data!"
+    },
+
+    "village": "Village",
+    "@village":{
+       "description": "Village"
+    },
+
+    "village1": "Village 1",
+        "@village1":{
+           "description": "Village"
+        },
+
+    "village2": "Village 2",
+        "@village2":{
+           "description": "Village"
+        },
+
+    "profile": "Profile",
+    "@profile":{
+       "description": "see profile"
+    },
+
+    "profileupdated":"Profile updated successfully",
+    "@profileupdated":{
+      "description": "Profile is updated now"
+    },
+
+    "editprofile":"Update",
+    "@editprofile":{
+      "description": "Update"
+    },
+
+    "itemnotexist":"Data cannot be edited!",
+     "@itemnotexist":{
+       "description": "Data cannot be edited!"
+     },
+
+     "noreguser":"No Registered User!!",
+     "@noreguser":{
+       "description": "No registered user"
+     },
+
+     "userdeleted":"User deleted successfully!!",
+     "@userdeleted":{
+       "description": "User deleted successfully!"
+     },
+
+     "userlist":"Users List",
+     "@userlist":{
+       "description": "Users List"
+     },
+
+     "datalist":"Data List",
+     "@datalist":{
+       "description": "Data List"
+     },
+
+     "nodata":"No Data",
+     "@nodata":{
+       "description": "No Data"
+     }
+    
+}
